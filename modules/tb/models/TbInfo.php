@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\tuberculosis\models;
+namespace app\modules\tb\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -32,6 +32,7 @@ class TbInfo extends \yii\db\ActiveRecord {
     public $DISTRICT;
     public $SUBDISTRICT;
     public $VILLA;
+  
 
     /**
      * @inheritdoc
@@ -95,6 +96,8 @@ class TbInfo extends \yii\db\ActiveRecord {
         return $this->hasOne(TbOutcomes::className(), ['TBNUMBER' => 'TBNUMBER']);
     }
 
+   
+
     public function getVilla() {
         return $this->hasOne(Villa::className(), ['VILLAGE_ID' => 'VILLAGE_ID']);
     }
@@ -111,7 +114,12 @@ class TbInfo extends \yii\db\ActiveRecord {
     public function getHospcode() {
         return $this->villa->HOSPCODE;
     }
+    
+    
+    
 
+    
+    
     public static function itemsAlias($key) {
 
         $items = [
@@ -128,6 +136,19 @@ class TbInfo extends \yii\db\ActiveRecord {
                 1 => 'ปอด',
                 2 => 'นอกปอด',
                 3 => 'รวม',
+            ],
+            'outcome' => [
+                1 => 'cure',
+                2 => 'com',
+                3 => 'fail',
+                 4 => 'fail',
+                 5 => 'fail',
+                 6 => 'fail',
+                 7 => 'fail',
+                 8 => 'fail',
+                 9 => 'fail',
+                 10 => 'fail',
+                 11 => 'fail',
             ],
         ];
         return ArrayHelper::getValue($items, $key, []);
@@ -158,6 +179,13 @@ class TbInfo extends \yii\db\ActiveRecord {
             $this->addError($attribute, 'CID  enter only  13 digits of  number.');
         }
     }
-  
-}
     
+    public function getItemOutcome() {
+        return self::itemsAlias('outcome');
+    }
+
+    public function getOutcomeName() {
+        return ArrayHelper::getValue($this->getItemOutcome(), $this->tbOutcomes->OUTCOME);
+    }
+
+}

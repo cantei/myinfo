@@ -5,12 +5,12 @@ namespace app\modules\tb\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\tb\models\TbInfo;
+use app\modules\tb\models\TbOutcomes;
 
 /**
- * TbInfoSearch represents the model behind the search form about `app\modules\tuberculosis\models\TbInfo`.
+ * TbOutcomesSearch represents the model behind the search form about `app\modules\tb\models\TbOutcomes`.
  */
-class TbInfoSearch extends TbInfo
+class TbOutcomesSearch extends TbOutcomes
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class TbInfoSearch extends TbInfo
     public function rules()
     {
         return [
-            [['TBNUMBER', 'DATE_REG', 'HMAIN', 'HN', 'PRENAME', 'FNAME', 'LNAME', 'CID', 'SEX', 'HNO', 'VILLAGE_ID', 'PHONE', 'MEMO'], 'safe'],
-            [['AGE', 'BW'], 'integer'],
+            [['TBNUMBER', 'OUTCOME', 'DATE_DSC'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class TbInfoSearch extends TbInfo
      */
     public function search($params)
     {
-        $query = TbInfo::find();
+        $query = TbOutcomes::find();
 
         // add conditions that should always apply here
 
@@ -59,23 +58,11 @@ class TbInfoSearch extends TbInfo
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'DATE_REG' => $this->DATE_REG,
-            'AGE' => $this->AGE,
-            'BW' => $this->BW,
+            'DATE_DSC' => $this->DATE_DSC,
         ]);
 
         $query->andFilterWhere(['like', 'TBNUMBER', $this->TBNUMBER])
-            ->andFilterWhere(['like', 'HMAIN', $this->HMAIN])
-            ->andFilterWhere(['like', 'HN', $this->HN])
-            ->andFilterWhere(['like', 'PRENAME', $this->PRENAME])
-            ->andFilterWhere(['like', 'FNAME', $this->FNAME])
-            ->andFilterWhere(['like', 'LNAME', $this->LNAME])
-            ->andFilterWhere(['like', 'CID', $this->CID])
-            ->andFilterWhere(['like', 'SEX', $this->SEX])
-            ->andFilterWhere(['like', 'HNO', $this->HNO])
-            ->andFilterWhere(['like', 'VILLAGE_ID', $this->VILLAGE_ID])
-            ->andFilterWhere(['like', 'PHONE', $this->PHONE])
-            ->andFilterWhere(['like', 'MEMO', $this->MEMO]);
+            ->andFilterWhere(['like', 'OUTCOME', $this->OUTCOME]);
 
         return $dataProvider;
     }

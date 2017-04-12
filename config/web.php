@@ -7,7 +7,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
- 'i18n' => [
+    'i18n' => [
         'translations' => [
             '*' => [
                 'class' => 'yii\i18n\PhpMessageSource',
@@ -75,6 +75,13 @@ $config = [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
         ],
+//        'tuberculosis' => [
+////            'class' => '\app\modules\tuberculosis\tuberculosisModule'
+//            'class' => 'app\mudules\tuberculosis\tuberculosis',
+//        ],
+          'tb' => [
+            'class' => 'app\modules\tb\Module',
+        ],
         'user' => [
             'class' => 'dektrium\user\Module',
             'enableUnconfirmedLogin' => false,  //  set  true  or  confirm  by  confirmed_at(datetime)  
@@ -110,7 +117,8 @@ $config = [
             'tb-register/*',
              'tb-outcomes/*',
             'registry/*',
-            'tb-switch-medications/*'
+            'tb-switch-medications/*',
+             'tb/*',
         ],
     ],
             'params' => $params,
